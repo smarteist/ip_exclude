@@ -1662,8 +1662,8 @@ void apply_routes_in_batch(const char *interface, const char *gateway, const cha
     }
 
     printf("Applying %d routes...\n", net_count);
-    // Execute the command by piping the script to 'sudo ip -batch -'.
-    run_command("sudo ip -batch -", command_script);
+    // Execute the command by piping the script to 'ip -batch -'.
+    run_command("ip -batch -", command_script);
     printf("Configured routes for %d networks.\n", net_count);
 
     free(command_script);

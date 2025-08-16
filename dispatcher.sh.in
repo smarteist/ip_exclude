@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# This script is called by NetworkManager when a network state changes.
+# It runs the application when an interface comes up.
+
+INTERFACE="$1"
+ACTION="$2"
+
+These values are set by CMake.
+APP_EXECUTABLE_NAME="@APP_EXECUTABLE_NAME@"
+APP_PATH="@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_BINDIR@/@APP_EXECUTABLE_NAME@"
+
+if [ "$ACTION" = "up" ]; then
+    # Log the action and execute the application.
+    logger "NetworkManager dispatcher: Interface $INTERFACE is up, running $APP_EXECUTABLE_NAME."
+    "$APP_PATH" 2>&1 | logger -t "$APP_EXECUTABLE_NAME"
+fi
+
+exit 0
